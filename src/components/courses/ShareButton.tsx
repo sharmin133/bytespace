@@ -16,7 +16,7 @@ export function ShareButton({ title }: { title: string }) {
         setTimeout(() => setCopied(false), 2000);
       }
     } catch {
-      // user share cancel korle kichu korar nai
+
     }
   }
 

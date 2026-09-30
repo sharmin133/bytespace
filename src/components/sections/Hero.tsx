@@ -1,23 +1,33 @@
+// src/components/sections/Hero.tsx
 import Image from "next/image";
-import { Container } from "@/components/ui/Container";
-import { Button } from "@/components/ui/Button";
+import { DecorShapes, type DecorShape } from "@/components/ui/DecorShapes";
 import { cn } from "@/lib/cn";
 
-/* Position ar size design er percentage theke nea. Stage = max-w-7xl wrapper. */
-const shapes = [
-  { src: "/images/hero/spring-lime.png", className: "left-0 top-[28%] w-[max(13%,4.5rem)]" },
-  { src: "/images/hero/spring-white-sm.png", className: "left-[15.5%] top-[49%] hidden w-[7.8%] md:block" },
-  { src: "/images/hero/torus-white.png", className: "bottom-[6%] left-[5.4%] w-[max(16%,5rem)]" },
-  { src: "/images/hero/cylinder-lime.png", className: "right-0 top-[25%] w-[max(11.3%,4rem)]" },
-  { src: "/images/hero/cone-white.png", className: "right-[13%] top-[47%] hidden w-[8.7%] md:block" },
-  { src: "/images/hero/spring-white.png", className: "bottom-[6%] right-[6.6%] w-[max(10.7%,4rem)]" },
+const lime = "[filter:sepia(1)_hue-rotate(25deg)_saturate(5)_brightness(1.15)]";
+const white = "brightness-[1.35]";
+
+const shapes: DecorShape[] = [
+  { src: "/images/hero/spring-lime.png", className: cn(lime, "-left-[5%] top-[31%] w-[22%] lg:left-0 lg:top-[26%] lg:w-[17%]") },
+  { src: "/images/hero/spring-white-sm.png", className: cn(white, "hidden lg:left-[14%] lg:top-[47%] lg:block lg:w-[10.5%]") },
+  { src: "/images/hero/torus-white.png", className: cn(white, "-left-[6%] bottom-[2%] w-[34%] lg:bottom-auto lg:left-[4%] lg:top-[68%] lg:w-[21%]") },
+  { src: "/images/hero/cylinder-lime.png", className: cn(lime, "-right-[4%] top-[28%] w-[19%] lg:right-0 lg:top-[24%] lg:w-[14.5%]") },
+  { src: "/images/hero/cone-white.png", className: cn(white, "hidden lg:right-[12%] lg:top-[45%] lg:block lg:w-[11.5%]") },
+  { src: "/images/hero/spring-white.png", className: cn(white, "-right-[4%] bottom-[2%] w-[30%] lg:bottom-auto lg:right-[3%] lg:top-[65%] lg:w-[17.5%]") },
 ];
 
 const avatars = [1, 2, 3, 4, 5].map((n) => `/images/avatars/${n}.png`);
 
-function FloatingCard({ className, children }: { className?: string; children: React.ReactNode }) {
+const d = (ms: number) => ({ "--delay": `${ms}ms` }) as React.CSSProperties;
+
+function HeroCard({ className, delay, children }: { className?: string; delay: number; children: React.ReactNode }) {
   return (
-    <div className={cn("absolute z-10 rounded-xl bg-white p-3 text-left text-ink shadow-lg sm:p-4", className)}>
+    <div
+      style={d(delay)}
+      className={cn(
+        "animate-pop-in absolute z-30 rounded-xl bg-white p-3 text-left text-ink shadow-xl lg:rounded-[1.1cqw] lg:p-[1.25cqw]",
+        className,
+      )}
+    >
       {children}
     </div>
   );
@@ -25,82 +35,113 @@ function FloatingCard({ className, children }: { className?: string; children: R
 
 export function Hero() {
   return (
-    <section className="bg-grid relative overflow-hidden bg-brand pt-28 text-white sm:pt-32">
-      {/* Stage: shape gulo ei max-w-7xl wrapper er sathe relative */}
-      <div className="relative mx-auto max-w-7xl">
-        {shapes.map((s) => (
-          <Image
-            key={s.src}
-            src={s.src}
-            alt=""
-            aria-hidden="true"
-            width={400}
-            height={400}
-            className={cn("pointer-events-none absolute z-20 h-auto select-none", s.className)}
-          />
-        ))}
+    <section className="bg-grid relative overflow-hidden bg-brand text-white">
+      {/* Stage: desktop e aspect ratio fixed, tai sob kichu Figma er moto scale kore */}
+      <div className="@container relative mx-auto w-full max-w-7xl px-5 pt-28 sm:pt-32 lg:aspect-[1062/757] lg:px-0 lg:pt-0">
+        <DecorShapes shapes={shapes} />
 
-        <Container className="relative text-center">
-          <h1 className="mx-auto max-w-3xl text-balance text-4xl font-semibold leading-tight sm:text-5xl lg:text-6xl">
-            Get Access to Hundreds Courses Available
+        {/* Heading + paragraph + search */}
+        <div className="relative z-10 text-center lg:absolute lg:inset-x-0 lg:top-[16.8%]">
+          <h1
+            style={d(100)}
+            className="animate-fade-up mx-auto max-w-3xl text-balance text-4xl font-semibold leading-tight sm:text-5xl lg:max-w-none lg:text-[length:4.9cqw] lg:leading-[1.19]"
+          >
+            Get Access to Hundreds <br className="hidden lg:block" />
+            Courses Available
           </h1>
-          <p className="mx-auto mt-6 max-w-xl text-sm text-white/90 sm:text-base">
+
+          <p
+            style={d(220)}
+            className="animate-fade-up mx-auto mt-5 max-w-md text-sm text-white/90 lg:mt-[2.4cqw] lg:max-w-[57%] lg:text-[length:1.35cqw] lg:leading-[1.4]"
+          >
             Unlock your creativity, gain valuable knowledge, and grow your business with our wide range of courses.
           </p>
 
-          <form action="/courses" role="search" className="mx-auto mt-8 flex max-w-md items-center gap-3">
+          <form
+            action="/courses"
+            role="search"
+            style={d(340)}
+            className="animate-fade-up mx-auto mt-7 flex max-w-md items-center gap-3 lg:mt-[4.2cqw] lg:w-[40.3%] lg:max-w-none lg:gap-[1.2cqw]"
+          >
             <label htmlFor="hero-search" className="sr-only">Search courses</label>
-            <div className="flex flex-1 items-center gap-2 rounded-full bg-white px-4 py-3 text-ink">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true" className="shrink-0 text-muted">
+            <div className="flex min-w-0 flex-1 items-center gap-2 rounded-full bg-white px-4 py-3 text-ink lg:h-[3.6cqw] lg:gap-[0.8cqw] lg:px-[1.5cqw] lg:py-0">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true" className="size-4 shrink-0 text-muted lg:size-[1.3cqw]">
                 <circle cx="11" cy="11" r="7" />
                 <path d="m20 20-3.5-3.5" />
               </svg>
-              <input id="hero-search" name="q" placeholder="Course, topic, creator" className="w-full bg-transparent text-sm outline-none placeholder:text-muted" />
+              <input
+                id="hero-search"
+                name="q"
+                placeholder="Course, topic, creator"
+                className="w-full min-w-0 bg-transparent text-sm outline-none placeholder:text-muted lg:text-[length:1.3cqw]"
+              />
             </div>
-            <Button type="submit">Search</Button>
+            <button
+              type="submit"
+              className="shrink-0 rounded-full bg-lime px-6 py-3 text-sm font-medium text-ink transition hover:brightness-95 lg:h-[3.2cqw] lg:px-[2.2cqw] lg:py-0 lg:text-[length:1.3cqw]"
+            >
+              Search
+            </button>
           </form>
+        </div>
 
-          {/* Semicircle + student + cards. Aspect ratio thakay shob kichu ek sathe scale kore */}
-          <div className="relative mx-auto mt-10 aspect-4/3 w-full max-w-208 sm:mt-12 sm:aspect-[5/2]">
-            <div aria-hidden="true" className="absolute inset-x-0 top-0 aspect-square rounded-full bg-lime" />
+        {/* Mobile e nijer box, desktop e (`contents`) children gulo stage er sathe position hoy */}
+        <div className="relative mx-auto mt-10 aspect-[5/4] w-full max-w-md sm:max-w-xl lg:contents">
+          {/* Lime circle: width 80%, top 57% => niche er ongsho section kete dey */}
+          <div
+            aria-hidden="true"
+            style={d(250)}
+            className="animate-pop-in absolute left-1/2 top-[30%] z-[1] aspect-square w-[112%] -translate-x-1/2 rounded-full bg-lime lg:top-[57%] lg:w-[80%]"
+          />
 
-            <Image
-              src="/images/hero/student.png"
-              alt="Smiling student with headphones holding a laptop"
-              width={668}
-              height={706}
-              priority
-              sizes="(min-width: 640px) 340px, 210px"
-              className="absolute bottom-0 left-1/2 h-auto w-[62%] -translate-x-1/2 sm:w-[41%]"
-            />
+          <Image
+            src="/images/hero/student.png"
+            alt="Smiling student with headphones holding a laptop"
+            width={668}
+            height={706}
+            priority
+            sizes="(min-width: 1024px) 34vw, 60vw"
+            style={d(400)}
+            className="animate-rise absolute bottom-0 left-1/2 z-20 h-auto w-[56%] -translate-x-1/2 lg:left-[38.6%] lg:w-[31.5%] lg:translate-x-0"
+          />
 
-            <FloatingCard className="left-[21.7%] top-[12%] hidden sm:block">
-              <p className="text-sm font-medium">UI/UX Design</p>
-              <p className="mt-1 text-[10px] text-muted">200 Courses • 1000+ Students</p>
-            </FloatingCard>
+          <HeroCard delay={650} className="left-0 top-[12%] hidden sm:block lg:left-[28.1%] lg:top-[62.3%] lg:w-[14.4%]">
+            <p className="text-xs font-medium lg:text-[length:1.15cqw]">UI/UX Design</p>
+            <p className="mt-0.5 text-[9px] text-muted lg:text-[length:0.75cqw]">200 Courses • 1000+ Students</p>
+          </HeroCard>
 
-            <FloatingCard className="right-0 top-[4%] w-36 sm:left-[61%] sm:right-auto sm:top-[15%] sm:w-[21%] sm:min-w-[10.5rem]">
-              <p className="text-[10px] text-muted sm:text-xs">Learning Progress</p>
-              <p className="mt-1 text-3xl font-semibold sm:text-4xl">55%</p>
-              <div role="progressbar" aria-valuenow={55} aria-valuemin={0} aria-valuemax={100} aria-label="Learning progress" className="mt-2 h-2 rounded-full bg-gray-100">
-                <div className="h-full w-[55%] rounded-full bg-lime" />
+          <HeroCard delay={750} className="right-0 top-[6%] w-[40%] lg:left-[58.5%] lg:right-auto lg:top-[63.5%] lg:w-[16.1%]">
+            <p className="text-[10px] text-muted lg:text-[length:0.95cqw]">Learning Progress</p>
+            <p className="mt-1 text-3xl font-semibold leading-none lg:mt-[0.6cqw] lg:text-[length:3.2cqw]">55%</p>
+            <div
+              role="progressbar"
+              aria-valuenow={55}
+              aria-valuemin={0}
+              aria-valuemax={100}
+              aria-label="Learning progress"
+              className="mt-2 h-1.5 overflow-hidden rounded-full bg-gray-100 lg:mt-[0.9cqw] lg:h-[0.55cqw]"
+            >
+              <div className="h-full w-[55%] rounded-full bg-lime" />
+            </div>
+          </HeroCard>
+
+          <HeroCard delay={850} className="bottom-[4%] left-0 w-[50%] lg:bottom-auto lg:left-[22.9%] lg:top-[81.6%] lg:w-[17.8%]">
+            <p className="text-xs font-medium lg:text-[length:1.05cqw]">Happy Students</p>
+            <p className="text-[9px] text-muted lg:text-[length:0.8cqw]">
+              4.5 (240) <span className="text-lime">★</span>
+            </p>
+            <div className="mt-2 flex items-center lg:mt-[0.7cqw]">
+              <div className="flex -space-x-2 lg:-space-x-[0.7cqw]">
+                {avatars.map((src) => (
+                  <Image key={src} src={src} alt="" width={40} height={40} className="size-6 rounded-full border-2 border-white object-cover lg:size-[2.6cqw]" />
+                ))}
               </div>
-            </FloatingCard>
-
-            <FloatingCard className="left-[14.8%] top-[57%] hidden min-w-[12rem] sm:block">
-              <p className="text-sm font-medium">Happy Students</p>
-              <p className="text-[10px] text-muted">4.5 (240) ★</p>
-              <div className="mt-2 flex items-center">
-                <div className="flex -space-x-2">
-                  {avatars.map((src) => (
-                    <Image key={src} src={src} alt="" width={32} height={32} className="size-7 rounded-full border-2 border-white object-cover" />
-                  ))}
-                </div>
-                <span className="ml-1 grid size-9 place-items-center rounded-full bg-lime text-xs font-medium">2K+</span>
-              </div>
-            </FloatingCard>
-          </div>
-        </Container>
+              <span className="-ml-1 grid size-7 place-items-center rounded-full bg-lime text-[9px] font-medium lg:size-[3cqw] lg:text-[length:0.9cqw]">
+                2K+
+              </span>
+            </div>
+          </HeroCard>
+        </div>
       </div>
     </section>
   );

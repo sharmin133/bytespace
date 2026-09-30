@@ -10,15 +10,21 @@ export function DecorShapes({ shapes }: { shapes: DecorShape[] }) {
   return (
     <>
       {shapes.map((s, i) => (
-        <Image
+        <div
           key={`${s.src}-${i}`}
-          src={s.src}
-          alt=""
           aria-hidden="true"
-          width={400}
-          height={400}
-          className={cn("pointer-events-none absolute z-0 h-auto select-none", s.className)}
-        />
+          style={{ "--delay": `${300 + i * 120}ms` } as React.CSSProperties}
+          className={cn("animate-pop-in pointer-events-none absolute z-[2] select-none", s.className)}
+        >
+          <Image
+            src={s.src}
+            alt=""
+            width={600}
+            height={600}
+            sizes="(min-width: 1024px) 18vw, 30vw"
+            className="h-auto w-full"
+          />
+        </div>
       ))}
     </>
   );

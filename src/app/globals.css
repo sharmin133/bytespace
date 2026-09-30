@@ -21,18 +21,10 @@ body { @apply bg-white text-ink antialiased; }
 :focus-visible { outline: 2px solid var(--color-lime); outline-offset: 2px; }
 
 @media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-
-  * {
-    transition: none !important;
-  }
-
-  .animate-fade-up,
-  .animate-grow-x {
-    animation: none;
-  }
+  html { scroll-behavior: auto; }
+  * { transition: none !important; }
+  .animate-fade-up, .animate-grow-x, .animate-pop-in,
+  .animate-rise, .animate-fade-down { animation: none; }
 }
 
 @keyframes grow-x {
@@ -56,6 +48,35 @@ body { @apply bg-white text-ink antialiased; }
   animation-delay: var(--delay, 0ms);
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .animate-fade-up { animation: none; }
+@keyframes pop-in {
+  from { opacity: 0; transform: scale(0.8); }
+  to { opacity: 1; transform: none; }
 }
+@keyframes rise {
+  from { opacity: 0; transform: translateY(8%); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-0.9rem) rotate(3deg); }
+}
+@keyframes fade-down {
+  from { opacity: 0; transform: translateY(-0.5rem); }
+  to { opacity: 1; transform: none; }
+}
+
+@utility animate-pop-in {
+  animation: pop-in 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: var(--delay, 0ms);
+}
+@utility animate-rise {
+  animation: rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: var(--delay, 0ms);
+}
+@utility animate-float {
+  animation: float var(--dur, 6s) ease-in-out var(--fd, 0s) infinite;
+}
+@utility animate-fade-down {
+  animation: fade-down 0.25s ease-out both;
+}
+
