@@ -12,7 +12,7 @@ export function NewsletterForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="mt-12 flex items-center gap-4 sm:gap-6">
+    <form onSubmit={handleSubmit} className="mt-8 flex w-full max-w-lg items-center gap-3 sm:mt-12 sm:gap-5">
       <label htmlFor="newsletter-email" className="sr-only">Email address</label>
       <input
         id="newsletter-email"
@@ -20,11 +20,11 @@ export function NewsletterForm() {
         name="email"
         required
         placeholder="Enter your email"
-        className="min-w-0 flex-1 rounded-full border border-gray-300 bg-white px-6 py-3.5 text-base outline-none transition placeholder:text-gray-700 focus:border-brand sm:w-[23.5rem] sm:flex-none"
+        className="min-w-0 flex-1 rounded-full border border-gray-300 bg-white px-5 py-3 text-sm outline-none transition placeholder:text-gray-700 focus:border-brand sm:px-6 sm:py-3.5 sm:text-base"
       />
       <button
         type="submit"
-        className="shrink-0 rounded-full bg-lime px-7 py-3 text-base font-medium text-ink transition hover:brightness-95"
+        className="shrink-0 rounded-full bg-lime px-5 py-3 text-sm font-medium text-ink transition hover:brightness-95 sm:px-7 sm:text-base"
       >
         Search
       </button>
