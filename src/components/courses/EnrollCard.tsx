@@ -27,7 +27,7 @@ export function EnrollCard({ course }: { course: CourseDetail }) {
           <li key={l.title} className="flex items-start justify-between gap-3 text-xs">
             <span className="flex gap-3">
               <span className="text-gray-500">{String(i + 1).padStart(2, "0")}</span>
-              <span>{l.title}</span>
+              <span className="font-semibold">{l.title}</span>
             </span>
             <span className="shrink-0 text-brand">{l.duration}</span>
           </li>
@@ -36,7 +36,7 @@ export function EnrollCard({ course }: { course: CourseDetail }) {
       <p className="mt-3 text-[10px] text-gray-500">{course.totalLessons - PREVIEW} more videos</p>
 
       <p className="mt-5 text-[10px] text-gray-600">Ready to Dive In? Enroll Now and Start Building Your Digital Future!</p>
-      <p className="mt-4">
+      <p className="mt-4 ">
         <span className="text-2xl font-semibold text-brand">{course.price}</span>
         <span className="text-[10px] text-gray-400">/lifetime</span>
       </p>

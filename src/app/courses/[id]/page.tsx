@@ -37,9 +37,13 @@ export default async function CourseDetailPage({ params }: { params: Params }) {
       <main className="overflow-x-clip">
         <CourseHeader course={course} />
 
-        <Container className="isolate grid gap-x-10 gap-y-8 pb-20 lg:grid-cols-[minmax(0,1fr)_21rem] xl:grid-cols-[minmax(0,1fr)_23rem]">
-          {/* Video: pichone full-width blue strip (before:) shudhu video er height porjonto */}
-          <div className="relative pb-7 before:absolute before:inset-y-0 before:left-1/2 before:-z-10 before:w-screen before:-translate-x-1/2 before:bg-brand before:bg-grid before:content-[''] lg:col-start-1 lg:row-start-1">
+             <Container className="isolate grid grid-cols-1 gap-x-10 gap-y-8 pb-20 lg:grid-cols-[minmax(0,1fr)_21rem] xl:grid-cols-[minmax(0,1fr)_23rem]">
+          <div
+            aria-hidden="true"
+            className="relative -z-10 col-span-full row-start-1 before:absolute before:inset-y-0 before:left-1/2 before:w-screen before:-translate-x-1/2 before:bg-brand before:bg-grid before:content-['']"
+          />
+
+          <div className="col-start-1 row-start-1 pb-7">
             <FadeIn delay={400}>
               <VideoPreview poster={course.poster} src={course.video} title={course.title} />
             </FadeIn>
@@ -55,7 +59,7 @@ export default async function CourseDetailPage({ params }: { params: Params }) {
               panels={{
                 About: <CourseAbout course={course} />,
                 Lesson: <LessonPanel course={course} />,
-               Reviews: <ReviewsPanel course={course} />,
+                Reviews: <ReviewsPanel course={course} />,
               }}
             />
           </div>

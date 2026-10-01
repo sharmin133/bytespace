@@ -5,9 +5,9 @@
   --color-lime: #ccff00;
   --color-ink: #111827;
   --color-muted: #6b7280;
+  --color-mist: #f4f4f4;
+  --color-shuttle: #868a94;
   --font-sans: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
-    --color-mist: #f4f4f4;  
-  --color-shuttle: #868a94;  
 }
 
 /* Hero er blue grid background */
@@ -18,26 +18,26 @@
   background-size: 88px 88px;
 }
 
-html { scroll-behavior: smooth; }
-body { @apply bg-white text-ink antialiased; }
-:focus-visible { outline: 2px solid var(--color-lime); outline-offset: 2px; }
 
-@media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
-  * { transition: none !important; }
-  .animate-fade-up, .animate-grow-x, .animate-pop-in,
-  .animate-rise, .animate-fade-down { animation: none; }
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-white text-ink antialiased;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-lime);
+    outline-offset: 2px;
+  }
 }
 
+/* ---------- Keyframes ---------- */
 @keyframes grow-x {
   from { transform: scaleX(0); }
   to { transform: none; }
-}
-
-@utility animate-grow-x {
-  animation: grow-x 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
-  animation-delay: var(--delay, 0ms);
-  transform-origin: left;
 }
 
 @keyframes fade-up {
@@ -45,40 +45,62 @@ body { @apply bg-white text-ink antialiased; }
   to { opacity: 1; transform: none; }
 }
 
-@utility animate-fade-up {
-  animation: fade-up 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
-  animation-delay: var(--delay, 0ms);
-}
-
 @keyframes pop-in {
   from { opacity: 0; transform: scale(0.8); }
   to { opacity: 1; transform: none; }
 }
+
 @keyframes rise {
   from { opacity: 0; transform: translateY(8%); }
   to { opacity: 1; transform: none; }
 }
-@keyframes float {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  50% { transform: translateY(-0.9rem) rotate(3deg); }
-}
+
 @keyframes fade-down {
   from { opacity: 0; transform: translateY(-0.5rem); }
   to { opacity: 1; transform: none; }
+}
+
+/* ---------- Animation utilities ---------- */
+@utility animate-grow-x {
+  animation: grow-x 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: var(--delay, 0ms);
+  transform-origin: left;
+}
+
+@utility animate-fade-up {
+  animation: fade-up 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: var(--delay, 0ms);
 }
 
 @utility animate-pop-in {
   animation: pop-in 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
   animation-delay: var(--delay, 0ms);
 }
+
 @utility animate-rise {
   animation: rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
   animation-delay: var(--delay, 0ms);
 }
-@utility animate-float {
-  animation: float var(--dur, 6s) ease-in-out var(--fd, 0s) infinite;
-}
+
 @utility animate-fade-down {
   animation: fade-down 0.25s ease-out both;
 }
 
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  * {
+    transition: none !important;
+  }
+
+  .animate-fade-up,
+  .animate-grow-x,
+  .animate-pop-in,
+  .animate-rise,
+  .animate-fade-down {
+    animation: none;
+  }
+}

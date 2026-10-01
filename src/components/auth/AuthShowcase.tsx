@@ -1,12 +1,22 @@
-import Image from "next/image";
+
 import { CourseCard } from "@/components/cards/CourseCard";
 import { StudentsCard } from "@/components/cards/StudentsCard";
+import { DecorShapes, type DecorShape } from "@/components/ui/DecorShapes";
 import { courses } from "@/data/content";
+
+const WHITE = "#ffffff";
+const LIME = "var(--color-lime)";
+
+const shapes: DecorShape[] = [
+  { src: "/images/hero/torus-white.png", color: LIME, className: "left-[10.5%] top-[8%] z-20 w-[22%]" },
+  { src: "/images/hero/cone-white.png", color: LIME, className: "left-0 top-[75%] z-20 w-[28%]" },
+  { src: "/images/hero/spring-white.png", color: WHITE, className: "left-[75%] top-[56%] z-20 w-[30%] z-30" },
+];
 
 export function AuthShowcase() {
   return (
-    // Sudhu decoration, tai screen reader ar keyboard theke lukano (inert)
-    <div aria-hidden="true" inert className="relative aspect-[6/7] w-full max-w-md">
+
+    <div aria-hidden="true" inert className="relative aspect-6/7 w-full max-w-md ">
       <div className="absolute left-0 top-[17%] w-[77%]">
         <CourseCard course={courses[1]} />
       </div>
@@ -14,9 +24,7 @@ export function AuthShowcase() {
         <CourseCard course={courses[2]} />
       </div>
 
-      <Image src="/images/hero/torus-lime.png" alt="" width={300} height={300} className="pointer-events-none absolute left-[10.5%] top-[8%] z-20 h-auto w-[22%]" />
-      <Image src="/images/hero/cone-lime.png" alt="" width={300} height={300} className="pointer-events-none absolute left-0 top-[75%] z-20 h-auto w-[28%]" />
-      <Image src="/images/hero/spring-white.png" alt="" width={300} height={300} className="pointer-events-none absolute left-[79%] top-[63%] z-20 h-auto w-[23%]" />
+      <DecorShapes shapes={shapes} />
 
       <StudentsCard variant="lime" className="absolute left-[47%] top-[78%] z-20 w-[53%]" />
     </div>

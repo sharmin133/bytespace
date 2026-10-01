@@ -10,7 +10,7 @@ import { cn } from "@/lib/cn";
 const links = [
   { label: "Home", href: "/" },
   { label: "Courses", href: "/courses" },
-  { label: "Creators", href: "/creators" },
+  { label: "Creators", href: "/creators/purepearl-studio" },
 ];
 
 const authLinks = [

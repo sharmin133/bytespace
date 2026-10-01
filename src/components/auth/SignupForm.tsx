@@ -32,7 +32,7 @@ export function SignupForm() {
 
     setLoading(true);
     try {
-      // Backend er register endpoint ekhane boshabe
+  
       const res = await fetch("/api/auth/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -43,7 +43,7 @@ export function SignupForm() {
         const body = await res.json().catch(() => null);
         throw new Error(body?.message ?? "Something went wrong. Please try again.");
       }
-      // TODO: success hole redirect (router.push("/dashboard"))
+    
     } catch (err) {
       setErrors({ form: err instanceof Error ? err.message : "Something went wrong. Please try again." });
     } finally {
@@ -63,8 +63,8 @@ export function SignupForm() {
         </p>
       )}
 
-      <div className="flex justify-end pt-1">
-        <Button type="submit" disabled={loading}>
+      <div className="flex justify-end pt-1 ">
+        <Button className="cursor-pointer" type="submit" disabled={loading}>
           {loading ? "Creating..." : "Continue"}
         </Button>
       </div>

@@ -30,7 +30,6 @@ export function SigninForm() {
 
     setLoading(true);
     try {
-      // Backend er login endpoint ekhane boshabe
       const res = await fetch("/api/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -41,7 +40,6 @@ export function SigninForm() {
         const body = await res.json().catch(() => null);
         throw new Error(body?.message ?? "Invalid email or password.");
       }
-      // TODO: success hole redirect (router.push("/dashboard"))
     } catch (err) {
       setErrors({ form: err instanceof Error ? err.message : "Something went wrong. Please try again." });
     } finally {
