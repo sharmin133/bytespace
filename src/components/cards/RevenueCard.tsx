@@ -13,8 +13,8 @@ export function RevenueCard({ title, period, amount, progress, badge, className 
   return (
     <div className={cn("rounded-xl bg-brand p-3 text-white shadow-lg sm:p-4", className)}>
       <p className="text-xs font-medium">{title}</p>
-      <p className="text-[10px] text-white/70">{period}</p>
-      <p className="mt-1 text-lg font-semibold sm:text-xl">{amount}</p>
+      <p className="hidden lg:block text-[10px] text-white/70">{period}</p>
+      <p className="mt-1 lg:text-lg font-semibold sm:text-xl">{amount}</p>
 
       {progress !== undefined && (
         <div
