@@ -11,15 +11,25 @@ import { cn } from "@/lib/cn";
 export function Courses() {
   const [active, setActive] = useState("Featured");
 
-  const visible = useMemo(() => courses.filter((c) => c.categories.includes(active)), [active]);
+  const visible = useMemo(
+    () => courses.filter((c) => c.categories.includes(active)),
+    [active],
+  );
 
   return (
-    <section id="courses" className="py-16 lg:py-24">
+    <section id="courses" className="pt-16 lg:pt-24">
       <Container>
         <SectionHeading
-          title="Discover Your Passion, Build Your Skills"
+          title={
+            <>
+              Discover Your Passion,
+              <br />
+              Build Your Skills
+            </>
+          }
           subtitle="At Bytespace Courses, we bring you closer to life-changing knowledge. Explore a variety of courses across different fields, from technology to the arts, and make a difference in your career and life."
-        />
+
+       />
 
         <div
           role="group"
@@ -34,13 +44,18 @@ export function Courses() {
               onClick={() => setActive(f)}
               className={cn(
                 "shrink-0 rounded-full px-3.5 py-2 text-xs transition",
-                f === active ? "bg-lime font-medium text-ink" : "bg-gray-100 text-gray-700 hover:bg-gray-200",
+                f === active
+                  ? "bg-lime font-medium text-ink"
+                  : "bg-gray-100 text-gray-700 hover:bg-gray-200",
               )}
             >
               {f}
             </button>
           ))}
-          <Link href="/courses" className="shrink-0 px-2 py-2 text-xs font-medium text-brand hover:underline">
+          <Link
+            href="/courses"
+            className="shrink-0 px-2 py-2 text-xs font-medium text-brand hover:underline"
+          >
             + More
           </Link>
         </div>
@@ -52,7 +67,9 @@ export function Courses() {
             ))}
           </div>
         ) : (
-          <p className="mt-12 text-center text-muted">No courses in this category yet.</p>
+          <p className="mt-12 text-center text-muted">
+            No courses in this category yet.
+          </p>
         )}
       </Container>
     </section>
