@@ -1,4 +1,3 @@
-// src/components/sections/Hero.tsx
 import Image from "next/image";
 import { DecorShapes, type DecorShape } from "@/components/ui/DecorShapes";
 import { cn } from "@/lib/cn";
@@ -6,13 +5,17 @@ import { cn } from "@/lib/cn";
 const lime = "[filter:sepia(1)_hue-rotate(25deg)_saturate(5)_brightness(1.15)]";
 const white = "brightness-[1.35]";
 
+
+const LIME = "var(--color-lime)";
+const WHITE = "#ffffff";
+
 const shapes: DecorShape[] = [
-  { src: "/images/hero/spring-lime.png", className: cn(lime, "-left-[5%] top-[31%] w-[22%] lg:left-0 lg:top-[26%] lg:w-[17%]") },
-  { src: "/images/hero/spring-white-sm.png", className: cn(white, "hidden lg:left-[14%] lg:top-[47%] lg:block lg:w-[10.5%]") },
-  { src: "/images/hero/torus-white.png", className: cn(white, "-left-[6%] bottom-[2%] w-[34%] lg:bottom-auto lg:left-[4%] lg:top-[68%] lg:w-[21%]") },
-  { src: "/images/hero/cylinder-lime.png", className: cn(lime, "-right-[4%] top-[28%] w-[19%] lg:right-0 lg:top-[24%] lg:w-[14.5%]") },
-  { src: "/images/hero/cone-white.png", className: cn(white, "hidden lg:right-[12%] lg:top-[45%] lg:block lg:w-[11.5%]") },
-  { src: "/images/hero/spring-white.png", className: cn(white, "-right-[4%] bottom-[2%] w-[30%] lg:bottom-auto lg:right-[3%] lg:top-[65%] lg:w-[17.5%]") },
+  { src: "/images/hero/spring-lime.png", color: LIME, className: "-left-[6%] top-[3%] w-[22%] lg:-left-[6%] lg:top-[26%] lg:w-[20%]" },
+  { src: "/images/hero/spring-white-sm.png", color: WHITE, className: "hidden lg:left-[14%] lg:top-[47%] lg:block lg:w-[10.5%]" },
+  { src: "/images/hero/torus-white.png", color: WHITE, className: "-left-[8%] top-[34%] w-[26%] lg:left-[4%] lg:top-[68%] lg:w-[21%]" },
+  { src: "/images/hero/cylinder-lime.png", color: LIME, className: "-right-[10%] -top-[10%] w-[20%] lg:-right-[5%] lg:top-[24%] lg:w-[16%]" },
+  { src: "/images/hero/cone-white.png", color: WHITE, className: "right-[10%] -top-[5%] w-[20%] lg:right-[12%] lg:top-[45%] lg:w-[11.5%]" },
+  { src: "/images/hero/spring-white.png", color: WHITE, className: "-right-[6%] bottom-[60%] w-[20%] lg:bottom-auto lg:right-[3%] lg:top-[65%] lg:w-[20%]" },
 ];
 
 const avatars = [1, 2, 3, 4, 5].map((n) => `/images/avatars/${n}.png`);
@@ -36,23 +39,19 @@ function HeroCard({ className, delay, children }: { className?: string; delay: n
 export function Hero() {
   return (
     <section className="bg-grid relative overflow-hidden bg-brand text-white">
-      {/* Stage: desktop e aspect ratio fixed, tai sob kichu Figma er moto scale kore */}
-      <div className="@container relative mx-auto w-full max-w-7xl px-5 pt-28 sm:pt-32 lg:aspect-[1062/757] lg:px-0 lg:pt-0">
-        <DecorShapes shapes={shapes} />
-
-        {/* Heading + paragraph + search */}
-        <div className="relative z-10 text-center lg:absolute lg:inset-x-0 lg:top-[16.8%]">
+      <div className="@container relative mx-auto w-full max-w-360 px-5 pt-28 sm:pt-32 lg:aspect-1440/1020 lg:px-0 lg:pt-0">
+        <div className="relative z-10 text-center lg:absolute lg:inset-x-0 lg:top-[12%]">
           <h1
             style={d(100)}
-            className="animate-fade-up mx-auto max-w-3xl text-balance text-4xl font-semibold leading-tight sm:text-5xl lg:max-w-none lg:text-[length:4.9cqw] lg:leading-[1.19]"
+            className="animate-fade-up mx-auto max-w-3xl text-balance text-[2rem] font-semibold leading-tight min-[420px]:text-4xl sm:text-5xl lg:max-w-none lg:text-[5cqw] lg:leading-[1.19]"
           >
-            Get Access to Hundreds <br className="hidden lg:block" />
+            Get Access to Hundreds <br className="hidden md:block" />
             Courses Available
           </h1>
 
           <p
             style={d(220)}
-            className="animate-fade-up mx-auto mt-5 max-w-md text-sm text-white/90 lg:mt-[2.4cqw] lg:max-w-[57%] lg:text-[length:1.35cqw] lg:leading-[1.4]"
+            className="animate-fade-up mx-auto mt-5 max-w-md text-sm text-white/90 lg:mt-[2.4cqw] lg:max-w-[57%] lg:text-[1.35cqw] lg:leading-[1.4]"
           >
             Unlock your creativity, gain valuable knowledge, and grow your business with our wide range of courses.
           </p>
@@ -73,25 +72,26 @@ export function Hero() {
                 id="hero-search"
                 name="q"
                 placeholder="Course, topic, creator"
-                className="w-full min-w-0 bg-transparent text-sm outline-none placeholder:text-muted lg:text-[length:1.3cqw]"
+                className="w-full min-w-0 bg-transparent text-sm outline-none placeholder:text-muted lg:text-[1.3cqw]"
               />
             </div>
             <button
               type="submit"
-              className="shrink-0 rounded-full bg-lime px-6 py-3 text-sm font-medium text-ink transition hover:brightness-95 lg:h-[3.2cqw] lg:px-[2.2cqw] lg:py-0 lg:text-[length:1.3cqw]"
+              className="shrink-0 rounded-full bg-lime px-6 py-3 text-sm font-medium text-ink transition hover:brightness-95 lg:h-[3.2cqw] lg:px-[2.2cqw] lg:py-0 lg:text-[1.3cqw]"
             >
               Search
             </button>
           </form>
         </div>
 
-        {/* Mobile e nijer box, desktop e (`contents`) children gulo stage er sathe position hoy */}
-        <div className="relative mx-auto mt-10 aspect-[5/4] w-full max-w-md sm:max-w-xl lg:contents">
-          {/* Lime circle: width 80%, top 57% => niche er ongsho section kete dey */}
+      
+        <div className="relative mx-auto mt-10 aspect-5/4 w-full max-w-md sm:max-w-xl md:max-w-2xl lg:contents">
+          <DecorShapes shapes={shapes} />
+
           <div
             aria-hidden="true"
             style={d(250)}
-            className="animate-pop-in absolute left-1/2 top-[30%] z-[1] aspect-square w-[112%] -translate-x-1/2 rounded-full bg-lime lg:top-[57%] lg:w-[80%]"
+            className="animate-pop-in absolute left-1/2 top-[30%] z-1 aspect-square w-[112%] -translate-x-1/2 rounded-full bg-lime lg:top-[57%] lg:w-[80%]"
           />
 
           <Image
@@ -102,17 +102,17 @@ export function Hero() {
             priority
             sizes="(min-width: 1024px) 34vw, 60vw"
             style={d(400)}
-            className="animate-rise absolute bottom-0 left-1/2 z-20 h-auto w-[56%] -translate-x-1/2 lg:left-[38.6%] lg:w-[31.5%] lg:translate-x-0"
+            className="animate-rise absolute bottom-0 left-1/2 z-20 h-auto w-[56%] -translate-x-1/2 sm:w-[50%] lg:left-[38.6%] lg:w-[31.5%] lg:translate-x-0"
           />
 
-          <HeroCard delay={650} className="left-0 top-[12%] hidden sm:block lg:left-[28.1%] lg:top-[62.3%] lg:w-[14.4%]">
-            <p className="text-xs font-medium lg:text-[length:1.15cqw]">UI/UX Design</p>
-            <p className="mt-0.5 text-[9px] text-muted lg:text-[length:0.75cqw]">200 Courses • 1000+ Students</p>
+          <HeroCard delay={650} className="left-[12%] top-[5%]  sm:block lg:left-[28.1%] lg:top-[62.3%] lg:w-[14.4%]">
+            <p className="text-xs font-medium lg:text-[max(10px,1.15cqw)]">UI/UX Design</p>
+            <p className="mt-0.5 text-[9px] text-muted lg:text-[max(9px,0.75cqw)]">200 Courses • 1000+ Students</p>
           </HeroCard>
 
-          <HeroCard delay={750} className="right-0 top-[6%] w-[40%] lg:left-[58.5%] lg:right-auto lg:top-[63.5%] lg:w-[16.1%]">
-            <p className="text-[10px] text-muted lg:text-[length:0.95cqw]">Learning Progress</p>
-            <p className="mt-1 text-3xl font-semibold leading-none lg:mt-[0.6cqw] lg:text-[length:3.2cqw]">55%</p>
+          <HeroCard delay={750} className="right-0 top-[40%] w-[38%] sm:w-[30%] lg:left-[60.5%] lg:right-auto lg:top-[65.5%] lg:w-[16.1%]">
+            <p className="text-[10px] text-muted lg:text-[max(9px,0.95cqw)]">Learning Progress</p>
+            <p className="mt-1 text-3xl font-semibold leading-none lg:mt-[0.6cqw] lg:text-[3.2cqw]">55%</p>
             <div
               role="progressbar"
               aria-valuenow={55}
@@ -125,18 +125,18 @@ export function Hero() {
             </div>
           </HeroCard>
 
-          <HeroCard delay={850} className="bottom-[4%] left-0 w-[50%] lg:bottom-auto lg:left-[22.9%] lg:top-[81.6%] lg:w-[17.8%]">
-            <p className="text-xs font-medium lg:text-[length:1.05cqw]">Happy Students</p>
-            <p className="text-[9px] text-muted lg:text-[length:0.8cqw]">
+          <HeroCard delay={850} className="bottom-[4%] left-0 w-[40%] sm:w-[36%] lg:bottom-auto lg:left-[26.9%] lg:top-[81.6%] lg:w-[17.8%]">
+            <p className="text-xs font-medium lg:text-[max(10px,1.05cqw)]">Happy Students</p>
+            <p className="text-[9px] text-muted lg:text-[max(9px,0.8cqw)]">
               4.5 (240) <span className="text-lime">★</span>
             </p>
             <div className="mt-2 flex items-center lg:mt-[0.7cqw]">
-              <div className="flex -space-x-2 lg:-space-x-[0.7cqw]">
+              <div className="flex -space-x-2 lg:-space-x-0.7cqw">
                 {avatars.map((src) => (
                   <Image key={src} src={src} alt="" width={40} height={40} className="size-6 rounded-full border-2 border-white object-cover lg:size-[2.6cqw]" />
                 ))}
               </div>
-              <span className="-ml-1 grid size-7 place-items-center rounded-full bg-lime text-[9px] font-medium lg:size-[3cqw] lg:text-[length:0.9cqw]">
+              <span className="-ml-1 grid size-7 place-items-center rounded-full bg-lime text-[9px] font-medium lg:size-[3cqw] lg:text-[max(9px,0.9cqw)]">
                 2K+
               </span>
             </div>

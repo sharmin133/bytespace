@@ -1,11 +1,10 @@
 import { Category, Course, CourseDetail, Creator, FooterLink, Partner, Stat, Testimonial } from "@/types";
 
 
-export const partners: Partner[] = [1, 2, 3, 4, 5].map((n) => ({
+export const partners: Partner[] = (["wave", "burst", "bolt", "dots", "rings"] as const).map((icon) => ({
   name: "Logoipsum",
-  logo: `/images/partners/${n}.svg`,
+  icon,
 }));
-
 export const courseFilters = [
   "Featured", "Music", "Drawing & Painting", "Marketing", "Animation", "Social Media",
   "UI/UX Design", "Creative Marketing", "Digital Illustration", "Film & Video", "Crafts",
@@ -13,7 +12,7 @@ export const courseFilters = [
   "Web Development", "Data Science", "Cooking",
 ];
 
-/* Design e shob card er studio, level, price ek. Tai common field ek jaygay. */
+
 const base: Omit<Course, "id" | "title" | "image" | "categories"> = {
   studio: "purepearl studio",
   level: "Beginner",

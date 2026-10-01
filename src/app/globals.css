@@ -6,6 +6,8 @@
   --color-ink: #111827;
   --color-muted: #6b7280;
   --font-sans: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
+    --color-mist: #f4f4f4;  
+  --color-shuttle: #868a94;  
 }
 
 /* Hero er blue grid background */

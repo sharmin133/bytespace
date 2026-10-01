@@ -1,4 +1,4 @@
-export interface Partner { name: string; logo: string }
+
 export interface Stat { value: string; label: string }
 
 export interface Course {
@@ -82,4 +82,11 @@ export interface Creator {
   bio: string[];
   avatar: string;
   followers: number;
+}
+
+export type PartnerIconName = "wave" | "burst" | "bolt" | "dots" | "rings";
+
+export interface Partner {
+  name: string;
+  icon: PartnerIconName;
 }
