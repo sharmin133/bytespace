@@ -7,7 +7,7 @@ import { footerColumns, legalLinks } from "@/data/content";
 export function Footer() {
   return (
     <footer className="bg-white text-ink">
-      <Container className="pt-16 lg:pt-[4.5rem]">
+      <Container className="pt-16 lg:pt-18">
         <div className="grid gap-12 lg:grid-cols-[51.7%_1fr] lg:gap-0">
         
           <div>
@@ -16,7 +16,7 @@ export function Footer() {
               Stay Up to date with our latest features and releases by joining our newsletter.
             </p>
             <NewsletterForm />
-            <p className="mt-7 max-w-[30rem] text-xs leading-relaxed text-gray-700">
+            <p className="mt-7  max-w-120 text-xs leading-relaxed text-gray-700">
               By subscribing, you agree to our Privacy Policy and consent to receive updates from our company.
             </p>
           </div>
